@@ -28,23 +28,24 @@
             android:id="@+id/tv_punts1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Punts"
             android:textColor="@color/colorGreen"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/tv_punts"
             android:layout_width="wrap_content"
             android:textColor="@color/colorGreen"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <Chronometer
             android:id="@+id/tv_temps"
             android:layout_width="wrap_content"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textColor="@color/colorRed"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

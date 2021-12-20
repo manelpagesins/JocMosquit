@@ -36,27 +36,33 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_punts;
 
     static  boolean correr = false;
-    static boolean mosquit_mort = false;
+    static boolean  mosquit_mort = false;
+    static boolean  jocIniciat = false;
+    static int puntuacio;
 
     /**
      * Funcio en la que posarem el comptador operatiu en el layout
      */
-    private void Temps(Chronometer tv_temps) {
+    private void Temps(Chronometer tv_temps, TextView tv_punts) {
 
         if (!correr) {
             tv_temps.setBase(SystemClock.elapsedRealtime());
             tv_temps.start();
             correr = true;
         }
-        /*
-        long elapsedMillis = SystemClock.elapsedRealtime() - tv_temps.getBase();
-        if(elapsedMillis == 30000){
-            tv_temps.stop();
-            finish();
-        }*/
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() { //Handler per controlar la reparicio del mosquit
+            @Override
+            public void run() {
+                correr = false;
+                startActivity(new Intent(MainActivity.this, Puntuacio.class));
+                puntuacio = Integer.parseInt(tv_punts.getText().toString());
+                finish();
+            }
+        }, 30000);
 
     }
-
 
     /**
      * Funcio per generar un mosquit
@@ -105,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
         tv_punts = (TextView) findViewById(R.id.tv_punts);
         main_screen = (ConstraintLayout) findViewById(R.id.main_screen);
 
-
-
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Temps(tv_temps);
+                Temps(tv_temps, tv_punts);
                 GenerarMosquit(main_screen);
                 btn_start.setVisibility(View.GONE);
+                jocIniciat = true;
+
             }
         });
 
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         GenerarMosquit(main_screen);
                     }
-                }, 2000);
+                }, 500);
             }
         });
     }
